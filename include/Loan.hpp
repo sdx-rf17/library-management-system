@@ -12,12 +12,14 @@ private:
     string return_date;
 
 public:
-    LOAN(int user_id, int book_id, string borrow_date, string return_date);
+    LOAN(int user_id, int book_id, string borrow_date);
     
     int getUserId() const;
     int getBookId() const;
     string getBorrowDate() const;
     string getReturnDate() const;
+
+    void setReturnDate(string date);
 };
 
 #endif

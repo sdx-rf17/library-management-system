@@ -12,6 +12,8 @@ private:
     string return_date;
 
 public:
+    LOAN(int user_id, int book_id, string borrow_date, string return_date);
+    
     int getUserId() const;
     int getBookId() const;
     string getBorrowDate() const;

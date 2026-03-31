@@ -5,12 +5,16 @@
 #include <vector>
 #include "Author.hpp"
 #include "Book.hpp"
+#include "Loan.hpp"
+#include "User.hpp"
 using namespace std;
 
 class LIBRARY{
     private:
         vector<BOOK> books;
         vector<AUTHOR> authors;
+        vector<LOAN> loans;
+        vector<USER> users;
     public:
         // Author features
         void addAuthor(const AUTHOR& author);
@@ -26,6 +30,13 @@ class LIBRARY{
         void updateBook(); // coming soon
         void printBook(const int& id);
         void listAllBooks(); // coming soon
+
+        // user features
+        void addUser(const USER& user);
+
+        //loan features
+        void borrowBook(int user_id, int book_id, string date);
+        void returnBook(int user_id, int book_id, string date);
 };
 
 #endif

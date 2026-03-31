@@ -1,4 +1,4 @@
-#include  "include/Library.hpp"
+#include  "Library.hpp"
 #include <iostream>
 #include <algorithm>
 using namespace std;
@@ -18,9 +18,6 @@ void LIBRARY::removeAuthor(const int& id){
     }
 }
 
-void LIBRARY::addBook(const BOOK& book) {
-    books.push_back(book);
-}
 
 void LIBRARY::printAuthor(const int& id){
     for (auto &a : authors){
@@ -36,9 +33,9 @@ void LIBRARY::printAuthor(const int& id){
 }
 
 void LIBRARY::printAuthorBooks(const int& id){
-
+    
     bool found = false;
- 
+    
     for(auto &a : authors) {
         if (a.getId() == id ){
             cout << "Author: " << a.getName() << "\n";
@@ -48,15 +45,19 @@ void LIBRARY::printAuthorBooks(const int& id){
     
     for (auto &b : books){
         if (b.getAuthorId() == id){
-
+            
             cout << "\t* " <<  b.getTitle() << endl;
             found = true;
         }
     }
-
+    
     if (!found){
         cout << "No books found for this author" << endl;
     }
+}
+
+void LIBRARY::addBook(const BOOK& book) {
+    books.push_back(book);
 }
 
 void LIBRARY::printBook(const int& id){
@@ -80,4 +81,48 @@ void LIBRARY::printBook(const int& id){
     }
 
     cout << "Book not found" << endl;
+}
+
+void LIBRARY::addUser(const USER& user){
+    users.push_back(user);
+}
+
+void LIBRARY::borrowBook(int user_id, int book_id, string date){
+
+    bool found = false;
+    for(auto &b : books){
+        if(b.getId() == book_id){
+            found = true;
+            break;
+        }
+    }
+
+    if(!found){
+        cout << "Book not found!" << endl;
+        return;
+    }
+
+    for(auto &l : loans){
+        if(l.getBookId() == book_id && l.getReturnDate() == "not returned"){
+            cout << "Book already borrowed!" << endl;
+        }
+    }
+
+    LOAN loan(user_id, book_id, date);
+    loans.push_back(loan);
+
+    cout << "Book borrowed successfully!" << endl;
+}
+
+void LIBRARY::returnBook(int user_id, int book_id, string date){
+    
+    for(auto &l : loans){
+        if(l.getUserId() == user_id && l.getBookId() == book_id && l.getReturnDate() == "not returned"){
+            l.setReturnDate(date);
+            cout << "Book returned successfully!" << endl;
+            return;
+        }
+    }
+
+    cout << "Loan not found!" << endl;
 }

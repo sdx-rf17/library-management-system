@@ -1,5 +1,5 @@
-#include "include/Book.hpp"
-#include "include/Author.hpp"
+#include "Book.hpp"
+#include "Author.hpp"
 
 BOOK::BOOK() : id(0), title(""), publish_date(""), version(0), author_id(0) {}
 
